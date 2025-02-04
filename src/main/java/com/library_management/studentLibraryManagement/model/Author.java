@@ -34,7 +34,7 @@ public class Author {
     @Column(name = "gender")
     private String gender;
 
-//    @JsonManagedReference
-//    @OneToMany(mappedBy = "author",cascade = CascadeType.ALL)
-//    private List<Book> bookList=new ArrayList<>();
+    @JsonManagedReference
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    private List<Book> bookList = new ArrayList<>();
 }
