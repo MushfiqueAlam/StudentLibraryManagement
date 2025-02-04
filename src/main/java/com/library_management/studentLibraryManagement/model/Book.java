@@ -24,7 +24,7 @@ public class Book {
     private String title;
 
     @Column(name = "pages",nullable = false)
-    private String pages;
+    private int pages;
 
     @Column(name = "publisher_name",nullable = false)
     private String publisherName;
