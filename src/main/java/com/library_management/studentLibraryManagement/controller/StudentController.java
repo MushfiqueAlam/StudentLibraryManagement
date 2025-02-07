@@ -74,4 +74,10 @@ public class StudentController {
         List<Student>studentList=studentService.findBySemOrEmail(semester,department);
         return studentList;
     }
+
+    @GetMapping("/findByEmailQuery")
+    public Student findByEmailQuery(@RequestParam String email){
+        Student student=studentService.findByQuery(email);
+        return student;
+    }
 }

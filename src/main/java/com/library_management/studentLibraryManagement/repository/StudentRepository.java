@@ -2,6 +2,7 @@ package com.library_management.studentLibraryManagement.repository;
 
 import com.library_management.studentLibraryManagement.model.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,4 +13,7 @@ public interface StudentRepository extends JpaRepository<Student,Integer> {
     public List<Student> findBydepartment(String department);
     public List<Student>findBySemesterAndDepartment(String semester,String department);
     public List<Student>findBySemesterOrDepartment(String semester,String department);
+
+    @Query(nativeQuery = true,value = "select * from student where email=:email1")
+    public Student getEmailByQuery(String email1);
 }

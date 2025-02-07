@@ -103,4 +103,9 @@ public class StudentService {
         List<Student> studentList=studentRepository.findBySemesterOrDepartment(semester,department);
         return studentList;
     }
+
+    public Student findByQuery(String email){
+        Student student=studentRepository.getEmailByQuery(email);
+        return student;
+    }
 }
