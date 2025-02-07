@@ -32,7 +32,7 @@ public class Student {
     private String mobile;
 
     @Column(name="department",nullable = false)
-    private String departmet;
+    private String department;
 
     @Column(name = "dob",nullable = false)
     private String dob;
@@ -97,12 +97,12 @@ public class Student {
         this.mobile = mobile;
     }
 
-    public String getDepartmet() {
-        return departmet;
+    public String getDepartment() {
+        return department;
     }
 
-    public void setDepartmet(String departmet) {
-        this.departmet = departmet;
+    public void setDepartment(String department) {
+        this.department = department;
     }
 
     public String getDob() {

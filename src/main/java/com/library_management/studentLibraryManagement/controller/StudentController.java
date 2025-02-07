@@ -44,4 +44,34 @@ public class StudentController {
         String response=studentService.updateStudentSemester(id,semester);
         return response;
     }
+
+    @DeleteMapping("/delete/{id}")
+    public String deleteStudentById(@PathVariable int id){
+        String response=studentService.deleteStudent(id);
+        return response;
+    }
+
+    @GetMapping("/findByEmail")
+    public Student findByEmail(@RequestParam String email){
+        Student student=studentService.findStudentByEmail(email);
+        return student;
+    }
+
+    @GetMapping("/findByDepartment")
+    public List<Student> findByDepartment(@RequestParam String department){
+        List<Student> studentList=studentService.findByDepartment(department);
+        return studentList;
+    }
+
+    @GetMapping("/findBySemAndDepart")
+    public List<Student> findBySemAndDepart(@RequestParam String semester,@RequestParam String department){
+        List<Student> studentList=studentService.findBySemAndDeprt(semester,department);
+        return studentList;
+    }
+
+    @GetMapping("/findBySemOrDepart")
+    public List<Student> findBySemOrDeoart(@RequestParam String semester, @RequestParam String department){
+        List<Student>studentList=studentService.findBySemOrEmail(semester,department);
+        return studentList;
+    }
 }

@@ -11,7 +11,7 @@ public class StudentConvertor {
         student.setEmail(studentRequestDto.getEmail());
         student.setAge(studentRequestDto.getAge());
         student.setGender(studentRequestDto.getGender());
-        student.setDepartmet(studentRequestDto.getDepartment());
+        student.setDepartment(studentRequestDto.getDepartment());
         student.setDob(studentRequestDto.getDob());
         student.setSemester(studentRequestDto.getSemester());
         student.setMobile(studentRequestDto.getMobile());

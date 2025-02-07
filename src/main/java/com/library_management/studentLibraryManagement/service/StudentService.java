@@ -55,7 +55,7 @@ public class StudentService {
             student.setAge(studentRequestDto.getAge());
             student.setSemester(studentRequestDto.getSemester());
             student.setGender(studentRequestDto.getGender());
-            student.setDepartmet(studentRequestDto.getDepartment());
+            student.setDepartment(studentRequestDto.getDepartment());
             studentRepository.save(student);
             return "studnet has been successfully updated";
         }else {
@@ -72,5 +72,35 @@ public class StudentService {
         }{
             return "student not found";
         }
+    }
+
+    public String deleteStudent(int id){
+        Student student=getStudentById(id);
+        if(student!=null) {
+            studentRepository.deleteById(id);
+            return "student has been deleted";
+        }else {
+            return "student not found";
+        }
+    }
+
+    public Student findStudentByEmail(String email){
+        Student student=studentRepository.findByEmail(email);
+        return student;
+    }
+
+    public List<Student> findByDepartment(String department){
+        List<Student>studentList=studentRepository.findBydepartment(department);
+        return studentList;
+    }
+
+    public List<Student> findBySemAndDeprt(String semester,String department){
+        List<Student> studentList=studentRepository.findBySemesterAndDepartment(semester,department);
+        return studentList;
+    }
+
+    public List<Student> findBySemOrEmail(String semester,String department){
+        List<Student> studentList=studentRepository.findBySemesterOrDepartment(semester,department);
+        return studentList;
     }
 }
