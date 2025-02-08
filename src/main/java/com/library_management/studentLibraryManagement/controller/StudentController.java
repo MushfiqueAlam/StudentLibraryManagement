@@ -5,6 +5,7 @@ import com.library_management.studentLibraryManagement.repository.StudentReposit
 import com.library_management.studentLibraryManagement.requestDto.StudentRequestDto;
 import com.library_management.studentLibraryManagement.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,20 +18,35 @@ public class StudentController {
     StudentService studentService;
 
     @PostMapping("/save")
-    public String saveStudent(@RequestBody StudentRequestDto studentRequestDto){
+    public ResponseEntity<?> saveStudent(@RequestBody StudentRequestDto studentRequestDto){
+        try {
+
         String response=studentService.saveStudent(studentRequestDto);
-        return response;
+        return ResponseEntity.ok(response);
+        }catch (Exception e){
+            return ResponseEntity.internalServerError().body("Some exception occured"+e.getMessage());
+        }
     }
 
     //get student by id
     @GetMapping("/find/{id}")
-    public Student findById(@PathVariable int id){
-        return studentService.getStudentById(id);
+    public ResponseEntity<?> findById(@PathVariable int id){
+        try {
+            Student student=studentService.getStudentById(id);
+        return ResponseEntity.ok(student);
+        }catch (Exception e){
+            return ResponseEntity.internalServerError().body("Some error occured "+e.getMessage());
+        }
     }
 
     @GetMapping("/findAll")
-    private List<Student> findAll(){
-        return studentService.getAllStudent();
+    private ResponseEntity<?> findAll(){
+        try {
+            List<Student> studentList=studentService.getAllStudent();
+            return ResponseEntity.ok(studentList);
+        }catch (Exception e){
+            return ResponseEntity.internalServerError().body("some error occured"+e.getMessage());
+        }
     }
 
     @PutMapping("/update/{id}")

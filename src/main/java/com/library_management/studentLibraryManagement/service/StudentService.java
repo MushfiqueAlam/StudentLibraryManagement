@@ -22,6 +22,9 @@ public class StudentService {
     public String saveStudent(StudentRequestDto studentRequestDto){
         Student student= StudentConvertor.convertStudentRequestDtoIntoStudent(studentRequestDto);
 
+        if(student==null){
+            throw new RuntimeException("student not be saved");
+        }
         Card card=new Card();
         card.setCardStutus(CardStutus.ACTIVE);
 
@@ -37,11 +40,17 @@ public class StudentService {
 
     public Student getStudentById(int id){
         Optional<Student> studentOptional=studentRepository.findById(id);
+        if(!studentOptional.isPresent()){
+            throw new RuntimeException("Student not found with id "+id);
+        }
         return studentOptional.get();
     }
 
     public List<Student> getAllStudent(){
         List<Student>studentList=studentRepository.findAll();
+        if (studentList.isEmpty()){
+            throw  new RuntimeException("no student in student list");
+        }
         return studentList;
 
     }
