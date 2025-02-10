@@ -7,6 +7,9 @@ import com.library_management.studentLibraryManagement.model.Student;
 import com.library_management.studentLibraryManagement.repository.StudentRepository;
 import com.library_management.studentLibraryManagement.requestDto.StudentRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -54,6 +57,13 @@ public class StudentService {
         }
         return studentList;
 
+    }
+
+    //find all student by page//and learn how to do pagination
+
+    public List<Student> findAllStudentByPagination(int pageNo,int pageSize){
+        Page<Student>studentPage=studentRepository.findAll(PageRequest.of(pageNo,pageSize, Sort.by("name").ascending()));
+        return studentPage.getContent();
     }
 
     public String updateStudentById(int id,StudentRequestDto studentRequestDto){

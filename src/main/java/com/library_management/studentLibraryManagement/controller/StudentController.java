@@ -40,13 +40,19 @@ public class StudentController {
     }
 
     @GetMapping("/findAll")
-    private ResponseEntity<?> findAll(){
+    public ResponseEntity<?> findAll(){
         try {
             List<Student> studentList=studentService.getAllStudent();
             return ResponseEntity.ok(studentList);
         }catch (Exception e){
             return ResponseEntity.internalServerError().body("some error occured"+e.getMessage());
         }
+    }
+
+    @GetMapping("/findByPage")
+    public List<Student> findByPage(@RequestParam int pageNo,@RequestParam int pageSize){
+        List<Student>studentList=studentService.findAllStudentByPagination(pageNo,pageSize);
+        return studentList;
     }
 
     @PutMapping("/update/{id}")
