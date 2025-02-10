@@ -7,6 +7,7 @@ import com.library_management.studentLibraryManagement.model.Student;
 import com.library_management.studentLibraryManagement.repository.StudentRepository;
 import com.library_management.studentLibraryManagement.requestDto.StudentRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -95,8 +96,14 @@ public class StudentService {
     }
 
     public Student findStudentByEmail(String email){
+
         Student student=studentRepository.findByEmail(email);
-        return student;
+
+       if(student==null){
+            throw new RuntimeException("Student not found using this email");
+        }
+
+       return student;
     }
 
     public List<Student> findByDepartment(String department){

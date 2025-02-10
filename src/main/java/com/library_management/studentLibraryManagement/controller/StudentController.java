@@ -68,9 +68,16 @@ public class StudentController {
     }
 
     @GetMapping("/findByEmail")
-    public Student findByEmail(@RequestParam String email){
-        Student student=studentService.findStudentByEmail(email);
-        return student;
+    public ResponseEntity<?> findByEmail(@RequestParam String email){
+
+
+        try {
+            Student student=studentService.findStudentByEmail(email);
+            return ResponseEntity.ok(student);
+        }catch (Exception e){
+          return  ResponseEntity.internalServerError().body("some error occured "+e.getMessage());
+        }
+
     }
 
     @GetMapping("/findByDepartment")
